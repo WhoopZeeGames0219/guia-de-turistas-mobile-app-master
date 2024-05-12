@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Guía de Turistas</string>
+    <string name="title_activity_main">Guía de Turistas</string>
+    <string name="package_name">app.guiadeturistas.guiadeturistas</string>
+    <string name="custom_url_scheme">app.guiadeturistas.guiadeturistas</string>
+</resources>

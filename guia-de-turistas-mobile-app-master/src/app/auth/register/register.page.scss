@@ -1,0 +1,36 @@
+
+ion-content {
+    height: 100%;
+  }
+  
+  .logo-container {
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 40%;
+      width: auto;
+    }
+  }
+  
+  .signup-container {
+    animation: showUp 3s ease;
+    height: 40%;
+  }
+  
+  .register-label {
+    font-size: 1.1em;
+  }
+  
+  .reset-password {
+    margin: 15px 0 5px 0;
+    font-size: 1.1em;
+  }
+
+  .eye-icon{
+      margin-top: 45px;
+  }
+  
+  
+  

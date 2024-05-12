@@ -1,0 +1,22 @@
+
+
+  <ion-header>
+    <ion-toolbar >
+      <ion-title color="primary">
+        ¡Bienvenid@!
+      </ion-title>
+    </ion-toolbar>
+    
+</ion-header>
+<ion-content class="welcome-content">
+  <ion-row  class="ion-align-items-center row-section">
+    <iframe *ngIf="!!this.sanitizedUrl" [src]="this.sanitizedUrl" (load)="handleIFrameLoadEvent()" allow="autoplay;"
+      frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </ion-row>
+  <ion-button *ngIf="buttonAppear" class="ion-margin-top"expand="block" share="round" color="primary" (click)="navigateToPanel()">Saltar video</ion-button>
+
+  <!-- <app-slides></app-slides> -->
+
+  </ion-content>

@@ -1,0 +1,16 @@
+{
+	"appId": "app.guiadeturistas.guiadeturistas",
+	"appName": "Guía de Turistas",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 4000
+		},
+		"WebView": {
+			"scrollEnabled": false
+		}
+	},
+	"cordova": {}
+}

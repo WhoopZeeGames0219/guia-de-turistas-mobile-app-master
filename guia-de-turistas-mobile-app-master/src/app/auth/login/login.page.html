@@ -1,0 +1,64 @@
+<ion-content>
+  <div class="logo-container">
+      <img src="./../../../assets/images/png/logo.png">
+  </div>
+  <div class="login-container">
+      <ion-card class="ion-padding">
+          <ion-card-header>
+              Inicia sesion
+          </ion-card-header>
+          <form [formGroup]="loginForm"> 
+              <ion-item>
+                  <ion-label position="floating">Correo</ion-label>
+                  <ion-input formControlName="email" autocomplete="'on'"
+                             type="email"></ion-input>
+              </ion-item>
+              <ion-note class="ion-margin-start"
+                      *ngIf="loginForm.controls['email'].status === 'INVALID' && loginForm.controls['email'].touched"
+                      color="danger">correo inválido
+              </ion-note>
+              <ion-item>
+                  <ion-label position="floating">Contraseña</ion-label>
+                  <ion-input formControlName="password" [type]="passwordVisible ? 'text' : 'password'"></ion-input>
+                  <ion-icon class= "eye-icon"[name]="passwordVisible ? 'eye' : 'eye-off'" slot="end"
+                            (click)="togglePasswordVisible()"></ion-icon>
+              </ion-item>
+              <ion-note class="ion-margin-start"
+                      *ngIf="loginForm.controls['password'].status === 'INVALID' && loginForm.controls['password'].touched"
+                      color="danger">contraseña incorrecta
+              </ion-note>
+              <ion-button class="ion-margin-top ion-margin-bottom" expand="block" (click)="onLogin()">
+                  Iniciar sesión
+              </ion-button>
+              <div>
+                  <ion-label class="ion-margin">
+                      ¿No tienes cuenta?
+                      <b>
+                          <ion-text class="register-label" color="primary" (click)="registerPage()">
+                              Regístrate aquí
+                          </ion-text>
+                      </b>
+                  </ion-label>
+              </div>
+              <div class="reset-password">
+                  <ion-label class="ion-margin">
+                    <b>
+                      <ion-text color="primary" (click)="onResetAccount()">
+                          Recuperar contraseña
+                      </ion-text>
+                    </b>
+                  </ion-label>
+              </div>
+              <div class="ion-margin-top">
+                <ion-label class="ion-margin">
+                    <b>
+                        <ion-text class="register-label ion-margin-top" color="primary" (click)="goToPanelPage()">
+                            Navegar experiencias -->
+                        </ion-text>
+                    </b>
+                </ion-label>
+              </div>
+          </form>
+      </ion-card>
+  </div>
+</ion-content>

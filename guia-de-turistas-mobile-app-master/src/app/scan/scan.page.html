@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Validador de Paquetes</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-margin-start" >
+  <ion-text class="ion-justify-content-center ion-text-center" expand="block">
+    <h4 *ngIf="!user" class="title">¡Bienvenido!</h4>
+    <h4 *ngIf="user" class="title">¡Bienvenido {{user.name}}!</h4>
+  </ion-text>
+    <ion-text class="ion-justify-content-center ion-text-center" expand="block">
+      <h4 *ngIf="user?.scans" class="title">Total de códigos QR escaneados: {{user.scans.length}}</h4>
+    </ion-text>
+    <!-- <ion-text class="ion-justify-content-center ion-text-center" expand="block">
+      <h4 *ngIf="user && user.scans">Paquetes escaneados el día de hoy: {{todayScans.length}}</h4>
+    </ion-text> -->
+    <ion-text class="ion-margin-start" color="tertiary" >
+      Sponsor:
+    </ion-text>
+    <ion-select *ngIf="sponsorsList.length > 0" 
+      placeholder="{{sponsorsList[0].name}}"
+      class=""
+      (ngModel)="selectedSponsor"
+      (ionChange)='sponsorChange($event.detail.value)' 
+      multiple="false"
+      okText="Seleccionar" 
+      cancelText="Regresar" >
+      <ion-select-option  *ngFor="let sponsor of sponsorsList" value={{sponsor.userId}}>
+        {{sponsor.name}}
+      </ion-select-option>
+    </ion-select>
+    <ion-text class="ion-margin-start" color="tertiary" >
+      Filtro gráfica:
+    </ion-text>
+    <ion-select *ngIf="filters.length > 0" 
+      placeholder="{{filters[0].label}}"
+      class=""
+      (ngModel)="selectedfilter"
+      (ionChange)='filterChange($event.detail.value)' 
+      multiple="false"
+      okText="Seleccionar" 
+      cancelText="Regresar" >
+      <ion-select-option  *ngFor="let filter of filters" value={{filter.value}}>
+        {{filter.label}}
+      </ion-select-option>
+    </ion-select>
+    
+    <ion-text class="ion-justify-content-center ion-text-center" expand="block">
+      <h5 class="ion-margin-start" *ngIf="user?.scans" class="title">Paquetes validados {{filterText}}: {{totalValidatedPackages}}</h5>
+    </ion-text>
+
+    <div class="chart-container">
+      <ngx-charts-bar-vertical #chart
+      [view]="[300,300]"
+      [results]="graphData"
+      [xAxisLabel]="'Products'"
+      [legendTitle]="'Product Sale Chart'"
+      [yAxisLabel]="'Sale'"
+      [legend]="false"
+      [scheme]="colorScheme"
+      [showXAxisLabel]="false"
+      [showYAxisLabel]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [gradient]="false">
+  </ngx-charts-bar-vertical>
+    </div>
+    <ion-button (click)="openCamera()" color="tertiary" class="ion-margin-top ion-margin-bottom camera-button" expand="block">
+      Validar código QR
+    </ion-button>
+</ion-content>
+
+
+

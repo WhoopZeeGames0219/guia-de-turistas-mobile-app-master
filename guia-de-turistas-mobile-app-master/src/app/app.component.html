@@ -1,0 +1,59 @@
+<ion-app class="scanner-hide">
+  <ion-split-pane contentId="main-content" >
+    <ion-menu (ionWillOpen)="splitPaneVisible($event)" side="end" contentId="main-content" type="push">
+      <ion-content>
+        <ion-list class="ion-margin-top" id="inbox-list">
+          <!-- <ion-list-header>Guia de Turistas</ion-list-header> -->
+          <ion-note class="ion-margin-top">Guía de Turistas</ion-note>
+
+          <ion-menu-toggle auto-hide="true" *ngFor="let p of appPages; let i = index">
+            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="true" >
+            <ion-item (click)="goToVideoTutorial()" lines="none" detail="false">
+              <ion-icon slot="start" [ios]="'play-outline'" [md]="'play-sharp'"></ion-icon>
+              <ion-label>Tutorial</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="true" >
+            <ion-item (click)="goToWhatsApp()" lines="none" detail="false">
+              <ion-icon slot="start" [ios]="'logo-whatsapp'" [md]="'logo-whatsapp'"></ion-icon>
+              <ion-label>Servicio al Cliente</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item *ngIf="StorageUser" (click)="logout()" routerDirection="root" lines="none" detail="false" >
+              <ion-icon slot="start" [ios]="'exit-outline'" [md]="'exit-sharp'"></ion-icon>
+              <ion-label>Cerrar sesión</ion-label>
+            </ion-item>
+            <ion-item *ngIf="StorageUser" (click)="eraseAccount()" routerDirection="root" lines="none" detail="false" >
+              <ion-icon slot="start" [ios]="'trash-outline'" [md]="'trash-sharp'"></ion-icon>
+              <ion-label>Eliminar cuenta</ion-label>
+            </ion-item>
+            <ion-item *ngIf="!StorageUser" (click)="goToLogin()" routerDirection="root" lines="none" detail="false" >
+              <ion-icon slot="start" [ios]="'exit-outline'" [md]="'exit-sharp'"></ion-icon>
+              <ion-label>Iniciar Sesión</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content" #maincontent></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
+<div class="scanner-ui">
+  <!-- return button top left in header-->
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-button class="scanner-return" (click)="closeScanCamera()" fill="clear" color="primary" size="medium" shape="round" >
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-title>Escanear código QR</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  </div>
