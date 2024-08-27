@@ -1,0 +1,7 @@
+{
+  "name": "guia-de-turistas-mobile-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

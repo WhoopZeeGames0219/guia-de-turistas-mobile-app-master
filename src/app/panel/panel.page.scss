@@ -1,0 +1,82 @@
+.city-select-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 100%;
+}
+.layer{
+    height: 250px;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+}
+.panel-item{
+    
+    padding: 0px !important;
+    &-text-container{
+        // background-color: rgba(134, 131, 131, 0.47); /* 50% opacity black background will keep your text fully opaque */
+        position: absolute;
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+    &-text{ 
+        color: white;
+        opacity: 1 !important;
+        position: relative; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+.filter-info-text{
+    font-size: 11px;
+}
+.package-image{
+    min-width: 155px;
+    min-height: 155px;
+    object-fit: scale-down;
+}
+
+.brand-image{
+    width: 100%;
+    // max-width: 120px;
+    max-height: 120px;
+    min-height: 120px;
+    object-fit: scale-down;
+} 
+
+ion-select{
+    color: gray !important;
+    --placeholder-color: gray;
+}
+ion-searchbar{
+    color: gray;
+}
+
+ion-select::part(text) {
+    color: gray;
+}
+.filter{
+    margin-top: 25px;
+    margin-right: 10px;
+    margin-left: 9px;
+    font-size: 1.5rem;
+}
+.active{
+    color: #fcbf49;
+}
+.scroll-content{
+    position: relative;
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
+    overflow-y: hidden;
+}
+.selected-date-toolbar{
+    --background: #003049 !important
+}

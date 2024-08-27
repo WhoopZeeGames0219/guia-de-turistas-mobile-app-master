@@ -1,0 +1,131 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/ionic-swiper';
+
+.bone-background{
+    // background-color: #eae2b7;
+}
+
+.white-color{
+    color: white !important;
+}
+// ion-header{
+//     --background: #eae2b7;
+// }
+// ion-searchbar{
+//     --background-color: #eae2b7;
+// }
+// ion-toolbar{
+//     --background: #eae2b7;
+// }
+
+ion-content{
+    --background: #ffffff !important;
+}
+//Logo icon in all pages
+.title-logo {
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+.logo{
+    width: 120px;
+    height: 35px;
+}
+
+ion-select::part(text) {
+    color: #003049;
+}
+
+ion-select::part(icon) {
+    color: #003049;
+    // opacity: 1;
+    margin: 2px !important;
+}
+
+.paragraph{
+    opacity: 0.7;
+}
+.details{
+    font-size: .9rem;
+}
+ion-toolbar{
+    // --background: #e0e5e9 !important;
+    --background: white ;
+    color: #f77f00 ;
+
+  }
+ion-menu-button{
+      color: #f77f00 !important;
+}
+ion-back-button{
+      color: #f77f00;
+}
+.on-selected{
+    background-color: #f77f00 !important;
+}
+.week-title {
+    color: #333 !important;
+}
+.searchbar-input.sc-ion-searchbar-md {
+    color: revert;
+}
+.searchbar-search-icon.sc-ion-searchbar-ios {
+    color: gray !important;
+    opacity: 0.5;
+}
+.searchbar-clear-button.sc-ion-searchbar-ios {
+   color: gray;
+}
+ion-select::part(icon) {
+    color: gray;
+}
+//scanner scc
+body.scanner-active {
+    --background: transparent;
+    --ion-background-color: transparent;
+  }
+
+.scanner-ui { display: none; }
+.scanner-hide { visibility: visible; }
+
+body.qrscanner { background-color: transparent; }
+body.qrscanner .scanner-ui { display: block; }
+body.qrscanner .scanner-hide { visibility: hidden; }
+//Animations
+@keyframes showUp {
+    0% {
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+        visibility: visible;
+        }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+  }

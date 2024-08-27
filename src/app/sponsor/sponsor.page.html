@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Vista Gráficas</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text class="ion-justify-content-center ion-text-center" expand="block">
+    <h4 *ngIf="!user" class="title">¡Bienvenido!</h4>
+    <h4 *ngIf="user" class="title">¡Bienvenido {{user.sponsorName}}!</h4>
+  </ion-text>
+    <ion-text class="ion-margin-start" color="tertiary" >
+      CDC:
+    </ion-text>
+    <ion-select *ngIf="restaurantsList.length > 0" 
+      placeholder="{{restaurantsList[0].name}}"
+      class=""
+      (ngModel)="selectedRestaurant"
+      (ionChange)='restaurantChange($event.detail.value)' 
+      multiple="false"
+      okText="Seleccionar" 
+      cancelText="Regresar" >
+      <ion-select-option  *ngFor="let restaurant of restaurantsList" value={{restaurant.userId}}>
+        {{restaurant.name}}
+      </ion-select-option>
+    </ion-select>
+    <ion-text class="ion-margin-start" color="tertiary" >
+      Filtro:
+    </ion-text>
+    <ion-select *ngIf="filters.length > 0" 
+      placeholder="{{filters[0].label}}"
+      class=""
+      (ngModel)="selectedfilter"
+      (ionChange)='filterChange($event.detail.value)' 
+      multiple="false"
+      okText="Seleccionar" 
+      cancelText="Regresar" >
+      <ion-select-option  *ngFor="let filter of filters" value={{filter.value}}>
+        {{filter.label}}
+      </ion-select-option>
+    </ion-select>
+    <ion-text class="ion-justify-content-center ion-text-center" expand="block">
+      <h5 class="ion-margin-start" *ngIf="selectedRestaurantUser.scans" class="title">Paquetes validados {{filterText}}: {{totalValidatedPackages}}</h5>
+    </ion-text>
+    <div class="chart-container">
+      <ngx-charts-bar-vertical #chart
+      [view]="[300,300]"
+      [results]="graphData"
+      [xAxisLabel]="'Products'"
+      [legendTitle]="'Product Sale Chart'"
+      [yAxisLabel]="'Sale'"
+      [legend]="false"
+      [scheme]="colorScheme"
+      [showXAxisLabel]="false"
+      [showYAxisLabel]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [gradient]="false">
+  </ngx-charts-bar-vertical>
+    </div>
+</ion-content>

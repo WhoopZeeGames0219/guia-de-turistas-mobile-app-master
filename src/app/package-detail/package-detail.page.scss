@@ -1,0 +1,104 @@
+iframe{
+    width: 100%;
+    height: 220px;
+}
+.center-text{
+    text-align: -webkit-center;
+    text-align: center;
+}
+.top-image{
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
+}
+
+.galery-image-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+img{
+    border-radius: 15px !important;
+}
+
+.crossed-line{
+    text-decoration-line: line-through;
+}
+
+.available{
+    color: #4BB543;
+}
+
+.not-available{
+    color: #FF9494;
+}
+.no-border{
+    .item-inner{
+        border-style: none;
+    }
+}
+
+ion-item{
+    padding-left: 0 !important;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+  .brand{
+    width: 70%;
+    // padding: 16px;
+  }
+  .title{
+      font-family: ProximaNovaBold !important;
+  }
+.date-label{
+    display: flex;
+}
+.icons-details-row{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+.prices-table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+}
+.left-price{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+.right-price{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+.price{
+    font-size: 20px;
+}
+
+ion-badge{
+    --background: #1f8d00;
+    margin: 0 2px;
+}
+//   ion-toolbar{
+//     // --background: #e0e5e9 !important;
+//     --background: #f77f00 !important;
+//     color: white !important;
+
+//   }
+  

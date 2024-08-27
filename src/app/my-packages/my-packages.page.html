@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button
+            [text]="'Panel'"
+            [icon]="'chevron-back-outline'"
+            [defaultHref]="'/panel'">
+        </ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button> </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mis compras</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="activePurchases.length !== 0 || expiredPurchases.length !== 0">
+    <ion-list>
+      <ion-list-header>
+        <ion-label class="list-title">Sin Usar</ion-label>
+      </ion-list-header>
+
+      <ion-item
+        *ngFor="let item of activePurchases"
+        (click)="selectedPurchase(item)"
+      >
+        <ion-avatar slot="start">
+          <img src="{{item.imageUrl}}" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{item.pakageName}}</h2>
+          <h3>Fecha reservación: {{item.reservationDate | date}}</h3>
+          <h3>Cantidad: {{item.quantity }}</h3>
+        </ion-label>
+        <ion-icon
+          color="secondary"
+          slot="end"
+          name="chevron-forward-outline"
+        ></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header *ngIf="expiredPurchases.length !== 0">
+        <ion-label class="list-title">Expirados/Validados</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let item of expiredPurchases"
+      (click)="selectedPurchase(item)"
+      >
+        <ion-avatar slot="start">
+          <img src="{{item.imageUrl}}" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{item.pakageName}}</h2>
+          <h3>Fecha reservación: {{item.reservationDate | date}}</h3>
+          <h3>Cantidad: {{item.quantity }}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="activePurchases.length === 0 && expiredPurchases.length === 0">
+    <div class="ion-text-center flex-content">
+      <h4>Descubre tu experiencia ideal.</h4>
+      <img
+        class="restaurant-illustration"
+        src="/assets/images/png/service.png"
+        alt=""
+      />
+      Aún no tienes paquetes comprados.
+      <a (click)="goToPanel()">Descubrir</a>
+    </div>
+  </div>
+</ion-content>

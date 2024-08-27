@@ -1,0 +1,32 @@
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones de Menú</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismissModal()" [strong]="true">Listo</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <h3 class="full-width ion-text-center ion-margin-bottom">
+      Paquete validado exitosamente
+    </h3>
+    <h5>
+      Servir:
+    </h5>
+    <p class="paragraph">
+      {{package.name}}
+    </p>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide class="" *ngFor="let item of images">
+        <ion-col class="ion-margin-bottom">
+          <ion-img class="ion-padding-top galery-image ion-margin-bottom" [src]="item.imageUrl"></ion-img>
+          <ion-text class="ion-padding ion-margin-top ion-margin-bottom">{{item.imageTitle}}</ion-text>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+
+    <ion-button (click)="dismissModal()" color="tertiary" class="ion-margin-top ion-margin-bottom camera-button" expand="block">
+      Validar más códigos QR
+    </ion-button>
+<div class="ion-margin"></div> 
+ </ion-content>

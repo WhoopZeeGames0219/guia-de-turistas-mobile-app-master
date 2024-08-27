@@ -1,0 +1,175 @@
+<ion-header #header id="header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{selectedPackage.restaurant}} {{selectedPackage.sponsor}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)" #content>
+  <!-- <ion-buttons  float-right padding-top padding-end>
+      <ion-icon slot="icon-only" name="close" color="light"></ion-icon>
+  </ion-buttons> -->
+
+  <ion-row *ngIf="!!this.selectedPackage && !!this.selectedPackage.videoUrl" class="ion-align-items-center rowSection">
+    <iframe *ngIf="!!this.sanitizedUrl" [src]="this.sanitizedUrl" (load)="handleIFrameLoadEvent()" allow="autoplay;"
+      frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </ion-row>
+  <ion-row *ngIf="!!this.selectedPackage && !this.selectedPackage.videoUrl" class="ion-align-items-center rowSection">
+    <div class="top-image" [ngStyle]="{'background-image': 'url(' + selectedPackage.imageUrl + ')'}">
+
+    </div>
+  </ion-row>
+  <!-- <ion-row #segmentsRow id="segmentsRow">
+    <ion-segment scrollable="false" swipe-gesture="true" (ionChange)="segmentChanged($event)" value="purchase">
+      <ion-segment-button value="purchase">
+        <ion-label>Compra</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="galery">
+        <ion-label>Menú</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-row> -->
+
+  <div *ngIf="this.segment === 'purchase'" class="purchase_container ion-padding ion-margin-bottom">
+
+    <ion-text>
+      <h4 class="title">Detalles</h4>
+      <ion-row class="icons-details-row">
+        <img src="/assets/images/svg/coctail.svg" alt="coctail">
+        +
+        <img src="/assets/images/svg/coctail.svg" alt="coctail">
+        +
+        <img src="/assets/images/svg/dinner.svg" alt="dinner">
+      </ion-row>
+
+    <ion-text>
+    
+      <p class="paragraph">
+        {{selectedPackage.name}}
+      </p>
+      <p class="paragraph">
+        Disponibilidad
+      </p>
+      <p class="paragraph">
+       
+        <ion-badge *ngIf="selectedPackage.weekDaysAvailable?.monday">Lunes</ion-badge>
+        <ion-badge *ngIf="selectedPackage.weekDaysAvailable?.tuesday"> Martes</ion-badge>
+         <ion-badge *ngIf="selectedPackage.weekDaysAvailable?.wednesday"> Miercoles</ion-badge>
+        <ion-badge *ngIf="selectedPackage.weekDaysAvailable?.thursday"> Jueves</ion-badge>
+        <ion-badge *ngIf="selectedPackage.weekDaysAvailable?.friday"> Viernes</ion-badge>
+        <ion-badge *ngIf="selectedPackage.weekDaysAvailable?.saturday"> Sábado</ion-badge>
+         <ion-badge *ngIf="selectedPackage.weekDaysAvailable?.sunday"> Domingo</ion-badge>
+      </p>  
+        <p class="paragraph">
+          Horario de restaurante: {{this.selectedPackage.restaurantOpeningHour}} - {{this.selectedPackage.restaurantClosingHour}}
+        </p>
+      <p class="paragraph">
+        Horario válido de paquete: {{this.displayPackageSchedule}}
+      </p>
+     
+    </ion-text>
+    <!-- Packages images -->
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide class="ion-padding-bottom" *ngFor="let item of images">
+        <ion-col class="ion-margin-bottom">
+          <ion-img class="ion-padding-top galery-image ion-margin-bottom" [src]="item.imageUrl"></ion-img>
+          <ion-text class="ion-padding ion-margin-top">{{item.imageTitle}}</ion-text>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+
+    <div class="ion-text-center ion-margin-top">
+      <h4>Precios</h4>
+      
+    </div>
+    <div class="prices-table">
+      <div class="left-price">
+        Restaurante
+          <ion-text class="price ion-margin-top" >
+            {{selectedPackage.restaurantPrice | currency:'CAD':'symbol-narrow':'1.2-2'}} MXN
+          </ion-text>
+        <p class="paragraph details">(No incluye propina)</p>
+      </div>
+      <div class="right-price">
+        Guía de Turistas 
+          <ion-text class="available price ion-margin-top">
+             {{selectedPackage.price | currency:'CAD':'symbol-narrow':'1.2-2'}} MXN
+          </ion-text>
+        <p class="paragraph details">(Incluye propina)</p>
+      </div>
+     
+
+
+    </div>
+      
+
+      <!-- <h5>Patrocinador</h5>
+      <div class="container ion-no-padding">
+        <img class="brand" src={{package.brandImageUrl}} alt="">
+      </div>
+      <p class="paragraph">
+        {{selectedPackage.description}}
+      </p>
+      <h5>Restaurante</h5>
+      <div class="container">
+        <img class="brand" src={{package.restaurantImageUrl}} alt="">
+      </div>
+      <p class="paragraph">
+        {{selectedPackage.restaurantDescription}}
+      </p> -->
+      <p *ngIf="package.location" class="paragraph ion-text-center">
+        <a [href]="package.location">
+          Ver ubicación
+          <ion-icon class="ion-margin-end" slot="end" name="location-outline"></ion-icon>
+        </a>
+      </p>
+    </ion-text>
+
+
+    <h4 class="title">Disponibilidad</h4>
+    <ion-item (click)="openCalendar()">
+      <ion-label class="paragraph">Fecha</ion-label>
+      <ion-label *ngIf="!!selectedDate" slot="end" color="secondary" class="date-label"> {{selectedDate | date:'mediumDate'}} <ion-icon class="ion-margin-start" name="calendar-outline"></ion-icon></ion-label>
+      <ion-label *ngIf="!selectedDate" slot="end"color="secondary" class="date-label"> Seleccionar <ion-icon class="ion-margin-start" slot="end" name="calendar-outline"></ion-icon></ion-label>
+    </ion-item>
+    <br>
+    <br>
+    <h5 *ngIf="available > 0" class="available"> ¡Disponible!</h5>
+    <h5 *ngIf="available < 1" class="not-available"> ¡Ups! Se acabaron los paquetes para este día, intenta con otra
+      fecha.</h5>
+    <div *ngIf="available > 0">
+      <!-- Just leave 1 packet per purchase -->
+      <!-- <h5>Número de paquetes:</h5>
+      <ion-item >
+        <ion-label class="paragraph" slot="start">Cantidad:</ion-label>
+        <ion-label color="secondary" class="ion-text-center">{{numberOfPacketsSelected}}</ion-label>
+      </ion-item> -->
+      <ion-item class="no-border">
+        <ion-label slot="start">Total:</ion-label>
+        <ion-label class="ion-text-center">{{numberOfPacketsSelected * selectedPackage.price | currency:'CAD':'symbol-narrow':'1.2-2'}} MXN
+        </ion-label>
+      </ion-item>
+      <p class="available">Estás ahorrando: {{(numberOfPacketsSelected * selectedPackage.restaurantPrice) - (numberOfPacketsSelected * selectedPackage.price) | currency:'CAD':'symbol-narrow':'1.2-2'}} MXN + propina</p>
+      <ion-button (click)="purchase()" color="tertiary" class="ion-margin-top ion-margin-bottom" expand="block">
+        Comprar
+      </ion-button>
+    </div>
+
+  </div>
+  <div *ngIf="this.segment === 'galery'" class="galery-container ion-padding">
+
+    <ion-list>
+      <div class="galery-image-container" *ngFor="let item of images">
+        <ion-img class="ion-padding-top galery-image" [src]="item.imageUrl"></ion-img>
+        <ion-text class="ion-padding">{{item.imageTitle}}</ion-text>
+      </div>
+    </ion-list>
+  </div>
+</ion-content>

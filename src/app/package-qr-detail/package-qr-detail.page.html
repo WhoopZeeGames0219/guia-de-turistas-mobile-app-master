@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{selectedPurchase.pakageName}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div class="container">
+    <div class="row"> 
+      <img class="brand" src={{package.brandImageUrl}} alt="">
+      <img class="brand" src={{package.restaurantImageUrl}} alt="">
+  </div>
+  <div class="ion-text-center">
+    <ngx-qrcode class="bshadow"
+    [elementType]="elementType"
+    [errorCorrectionLevel]="correctionLevel"
+    [value]="value"
+    cssClass="bshadow"></ngx-qrcode>
+  </div>
+  <div class="ion-margin">
+    <p class="ion-text-center">¡Puedes tomar una captura de pantalla!</p>
+    <p >Enseña este código QR en el restaurante {{package.restaurant}} el 
+      <ion-text color="secondary ion-text-capitalize">{{selectedPurchase.reservationDate | date}} </ion-text>
+      para que validen tu compra y disfrutes de tu experiencia.</p>
+  
+      <h4>Detalles</h4>
+      <p class="paragraph">
+        Horario paquete: {{this.package.schedule}}
+      </p>
+      <p class="paragraph">
+        Horario restaurante: {{this.package.restaurantOpeningHour}} - {{this.package.restaurantClosingHour}}
+      </p>
+      <p class="paragraph">
+        Fecha de reservación: {{selectedPurchase.reservationDate | date}}
+      </p>
+      <p class="paragraph">
+        Cantidad: {{selectedPurchase.quantity}}
+      </p>
+      <p class="paragraph">
+        Descripción: 
+        {{package.description}}
+      </p>
+      <p *ngIf="package.location" class="paragraph">
+        <a [href]="package.location">
+          Ver ubicación
+          <ion-icon class="ion-margin-end" slot="end" name="location-outline"></ion-icon>
+        </a>
+      </p>
+      <p *ngIf="package.instagramUser || package.facebookUser" class="paragraph">
+        Redes sociales:
+      </p>  
+      <div class="ion-row ion-text-center">
+        <img class="social-network-logo ion-margin-start" *ngIf="package.facebookUser" src="assets/images/png/facebook_logo.png" alt="facebook" (click)="visitlink(package.facebookUser)">
+        <img class="social-network-logo ion-margin-start" *ngIf="package.instagramUser" src="assets/images/png/instagram_logo.png" alt="instagram" (click)="visitlink(package.instagramUser)">
+      </div>
+      <div class="paragraph ion-margin-top">
+        Antes de asistir al encuentro con tu experiencia, no olvides comenzarla desde sus redes sociales, verifica horarios y ubicación, además de leer los términos y condiciones siguientes:
+        <ul>
+          <li>El código no será válido si lo canjea una persona menor de edad según las leyes del país.
+          </li>
+          <li>
+            Es válida solo una experiencia al día x persona en el mismo establecimiento.
+          </li>
+          <li>
+            Se le entregará una experiencia por persona presente en el centro de consumo, esto quiere decir que si usted compró un código para 4 personas y solo asisten 3, el centro de consumo no podrá generar la cuarta debido a la condición del aparatado anterior.
+          </li>
+          <li>
+            Se pueden usar un máximo de 2 códigos QR en la misma que podría ser un total de 8 personas según lo elijas en tu compra.
+          </li>
+          <li>
+            No aplica para llevar.
+          </li>
+          <li>
+            En horario de cena podrá acceder a su entrada de comida siempre y cuando aún esté dentro del horario de la cocina del centro de consumo.
+          </li>
+          <li>
+            El código es válido solo en el día y horario elegidos.
+          </li>
+          <li>
+            En caso de estar cerrado el establecimiento deberá comunicarse con nosotros a través de guiadeturistas.net@gmail.com y se le hará el reembolso total de su compra si esto es corroborado por el centro de consumo.
+          </li>
+        </ul>
+      </div>
+  </div>
+  </div>
+  
+  
+</ion-content>
