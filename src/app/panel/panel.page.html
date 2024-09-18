@@ -1,64 +1,71 @@
-<ion-header >
-  <ion-toolbar >
-      <!-- Cities Filter -->
-      <div class="city-select-container ion-margin">
-          <ion-select placeholder="{{selectedCity}}" class="ion-no-margin ion-no-padding" [(ngModel)]="selectedCity" (ngModelChange)='cityChange(selectedCity)' multiple="false" okText="Filtrar" cancelText="Regresar" >
-          <ion-select-option  *ngFor="let city of citiesFilter" value={{city}}>
-            {{city}}
-          </ion-select-option>
-        </ion-select>
-      </div>
-      <div class="city-select-container ion-margin">
-        <ion-select placeholder="{{selectedHour}}" class="ion-no-margin ion-no-padding" [(ngModel)]="selectedHour" (ngModelChange)='hourChange(selectedHour)' multiple="false" okText="Filtrar" cancelText="Regresar" >
-        <ion-select-option  *ngFor="let hour of hoursFilter" value={{hour.value}}>
+<ion-header>
+  <ion-toolbar>
+    <!-- Cities Filter -->
+    <div class="city-select-container ion-margin">
+      <ion-select placeholder="{{selectedCity}}" class="ion-no-margin ion-no-padding" [(ngModel)]="selectedCity"
+        (ngModelChange)='cityChange(selectedCity)' multiple="false" okText="Filtrar" cancelText="Regresar">
+        <ion-select-option *ngFor="let city of citiesFilter" value={{city}}>
+          {{city}}
+        </ion-select-option>
+      </ion-select>
+    </div>
+    <div class="city-select-container ion-margin">
+      <ion-select placeholder="{{selectedHour}}" class="ion-no-margin ion-no-padding" [(ngModel)]="selectedHour"
+        (ngModelChange)='hourChange(selectedHour)' multiple="false" okText="Filtrar" cancelText="Regresar">
+        <ion-select-option *ngFor="let hour of hoursFilter" value={{hour.value}}>
           {{hour.displayValue}}
         </ion-select-option>
       </ion-select>
     </div>
-      <ion-buttons slot="end">
-        <ion-menu-button>
-        </ion-menu-button>
-      </ion-buttons>
-    </ion-toolbar>
-  <ion-toolbar appScrollHide [scrollHide]="headerScrollConfig"[scrollContent]="pageContent">
-    <ion-label (click)="infoButton()" class="ion-margin filter-info-text " >Filtra tus paquetes <ion-icon name="information-circle-outline"></ion-icon></ion-label>
-    <ion-searchbar (search)="introPressed($event)" placeholder="Comida, Música o Concepto" [(ngModel)]="term" animated="true" ></ion-searchbar> 
-    <ion-label class="filter" [ngClass]="{'active': !!dateFilter}" slot="end" (click)="showCalendar()" ><ion-icon name="calendar-outline"></ion-icon></ion-label>
+    <ion-buttons slot="end">
+      <ion-menu-button>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar appScrollHide [scrollHide]="headerScrollConfig" [scrollContent]="pageContent">
+    <ion-label (click)="infoButton()" class="ion-margin filter-info-text ">Filtra tus paquetes <ion-icon
+        name="information-circle-outline"></ion-icon></ion-label>
+    <ion-searchbar (search)="introPressed($event)" placeholder="Comida, Música o Concepto" [(ngModel)]="term"
+      animated="true"></ion-searchbar>
+
+    <ion-label class="filter" [ngClass]="{'active': !!dateFilter}" slot="end" (click)="showCalendar()"><ion-icon
+        name="calendar-outline"></ion-icon></ion-label>
+
   </ion-toolbar>
   <ion-toolbar class="selected-date-toolbar white" *ngIf="!!dateFilter">
     <ion-label class="ion-padding-start white-color">Disponibles el: {{dateFilter | date:'longDate'}}</ion-label>
-    <ion-label class="ion-padding-end white-color" slot="end" (click)="removeDateFilter()"><ion-icon name="close"></ion-icon></ion-label>
+    <ion-label class="ion-padding-end white-color" slot="end" (click)="removeDateFilter()"><ion-icon
+        name="close"></ion-icon></ion-label>
   </ion-toolbar>
-  
+
 </ion-header>
 
 <ion-content class="scroll-content" #pageContent forceOverscroll="true">
- <!-- No Packages -->
+  <!-- No Packages -->
   <div *ngIf="packages.length === 0" class="no-results ion-margin ion-text-center">
-    <ion-label >Constantemente estamos agregando nuevos y atractivos paquetes para ti. </ion-label> 
+    <ion-label>Constantemente estamos agregando nuevos y atractivos paquetes para ti. </ion-label>
     <br>
-    <ion-label>Intenta de nuevo modificando tu búsqueda.</ion-label> 
+    <ion-label>Intenta de nuevo modificando tu búsqueda.</ion-label>
   </div>
   <!-- Packages -->
-      <ion-grid class="ion-no-padding grid" id="packages-grid">
-        <ion-row size="auto">
-          <ion-col #gridCol class="panel-item" size="6" *ngFor="let item of packages | filter:term" id="gridCol" (click)="onSelectPackage(item)">
-            <!-- <div class="panel-item-text-container">
+  <ion-grid class="ion-no-padding grid" id="packages-grid">
+    <ion-row size="auto">
+      <ion-col #gridCol class="panel-item" size="6" *ngFor="let item of packages | filter:term" id="gridCol"
+        (click)="onSelectPackage(item)">
+        <!-- <div class="panel-item-text-container">
               <div class="panel-item-text">
                 <img class="brand-image" src={{item.brandImageUrl}} />
                 <img class="brand-image" src={{item.restaurantImageUrl}} />
               </div>
             </div>            -->
-            <div class="layer" [ngStyle]="{'background-image': 'url(' + item.imageUrl + ')'}">
-              <!-- <img class="package-image" src={{item.imageUrl}} /> -->
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-          <ion-infinite-scroll-content
-            loadingSpinner="bubbles"
-            >
-          </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-      </ion-grid>
+        <div class="layer" [ngStyle]="{'background-image': 'url(' + item.imageUrl + ')'}">
+          <!-- <img class="package-image" src={{item.imageUrl}} /> -->
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-grid>
 </ion-content>

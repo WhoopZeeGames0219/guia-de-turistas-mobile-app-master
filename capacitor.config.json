@@ -1,5 +1,5 @@
 {
-  "appId": "app.guiadeturistas.guiadeturistas",
+  "appId": "com.app.guiadeturistas",
   "appName": "Guía de Turistas",
   "bundledWebRuntime": false,
   "npmClient": "npm",
